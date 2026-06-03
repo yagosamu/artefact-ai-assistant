@@ -1,14 +1,17 @@
-# Welcome to Chainlit! 🚀🤖
+# AI Assistant with Tool Use
 
-Hi there, Developer! 👋 We're excited to have you on board. Chainlit is a powerful tool designed to help you prototype, debug and share applications built on top of LLMs.
+A small AI assistant that decides when to answer from its own knowledge and when to call external tools.
 
-## Useful Links 🔗
+**Available tools**
+- `calculator` — arithmetic, percentages, any numerical computation
+- `currency_converter` — convert between currencies using live ECB rates
 
-- **Documentation:** Get started with our comprehensive [Chainlit Documentation](https://docs.chainlit.io) 📚
-- **Discord Community:** Join our friendly [Chainlit Discord](https://discord.gg/k73SQ3FyUh) to ask questions, share your projects, and connect with other developers! 💬
+**Try these**
+- *Who was Marie Curie?* — direct LLM answer
+- *What is 128 times 46?* — uses the calculator
+- *How much is 100 EUR in BRL?* — uses the currency converter
+- *Convert 1000 USD to BRL and add a 5% fee* — chains both tools
 
-We can't wait to see what you create with Chainlit! Happy coding! 💻😊
+The agent matches the language of your question (try in Portuguese!).
 
-## Welcome screen
-
-To modify the welcome screen, edit the `chainlit.md` file at the root of your project. If you do not want a welcome screen, just leave this file empty.
+Built as a take-home challenge for Artefact. [Source on GitHub](https://github.com/yagosamu/artefact-ai-assistant)
