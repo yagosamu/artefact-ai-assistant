@@ -7,7 +7,7 @@ https://api.frankfurter.app/latest?amount=1000&from=USD&to=BRL
 import httpx
 from langchain_core.tools import tool
 
-FRANKFURTER_URL = "https://api.frankfurter.app/latest"
+FRANKFURTER_URL = "https://api.frankfurter.dev/v1/latest"
 
 
 def fetch_conversion(amount: float, from_currency: str, to_currency: str) -> dict:

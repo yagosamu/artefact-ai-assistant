@@ -78,6 +78,7 @@ class TestFetchConversion:
         result = fetch_conversion(0, "USD", "BRL")
         assert result["rate"] == 0   # No ZeroDivisionError
 
+
 class TestCurrencyToolWrapper:
     @respx.mock
     def test_invoke_returns_formatted_string(self):
