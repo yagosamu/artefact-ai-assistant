@@ -1,0 +1,35 @@
+[project]
+name = "artefact-ai-assistant"
+version = "0.1.0"
+description = "AI assistant that decides between answering from LLM knowledge or calling external tools (calculator, currency converter)."
+readme = "README.md"
+authors = [
+    { name = "Yago Lopes", email = "yago.piedraslopes@gmail.com" }
+]
+requires-python = ">=3.11"
+dependencies = [
+    "chainlit>=2.11.1",
+    "httpx>=0.28.1",
+    "langchain-anthropic>=1.4.4",
+    "langgraph>=1.2.4",
+    "python-dotenv>=1.2.2",
+]
+
+[project.scripts]
+artefact-ai-assistant = "artefact_ai_assistant:main"
+
+[build-system]
+requires = ["uv_build>=0.11.14,<0.12.0"]
+build-backend = "uv_build"
+
+[dependency-groups]
+dev = [
+    "pytest>=9.0.3",
+    "pytest-asyncio>=1.4.0",
+    "respx>=0.23.1",
+    "ruff>=0.15.15",
+]
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]
