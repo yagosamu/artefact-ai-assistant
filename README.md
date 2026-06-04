@@ -25,7 +25,7 @@ uv sync
 uv run chainlit run app.py
 ```
 
-Prefer the command line?
+If you prefer the command line:
 
 ```bash
 uv run artefact-ai-assistant "Convert 1000 USD to BRL and add a 5% fee"
@@ -58,8 +58,6 @@ Routing is delegated to the LLM, not hardcoded into a router. The system prompt 
 
 I've shipped two RAG-based SaaS with LangChain, so the patterns were already familiar. The real draw is the versatility: swapping `ChatAnthropic` for `ChatOpenAI` is one line. A native Anthropic SDK loop would be slightly cleaner for two tools, but locks you into one provider.
 
-Heads up: `create_react_agent` was deprecated in LangGraph 1.0. The new `langchain.agents.create_agent` is the recommended path.
-
 ### Routing through the LLM, not a classifier
 
 The brief uses "rotear" (route), which could imply a classifier ("is this math? then branch"). I delegate that decision to the LLM via tool descriptions. Adding a new tool is one line in `tools=[...]`. The composed query in the demo proves it: the agent calls `currency_converter`, reads the result, then calls `calculator` to apply the fee. None of that flow is hardcoded.
@@ -74,7 +72,7 @@ Purpose-built for LLM chat. Ships with `LangchainCallbackHandler`, which renders
 
 ### Frankfurter for the bonus tool
 
-Currency conversion composes with the calculator: "Convert 1000 USD to BRL and add a 5% fee" exercises both tools in one query. Weather or search would have been two unrelated tools side by side. [Frankfurter](https://frankfurter.dev/) uses ECB rates and needs no API key.
+Finance is something I'm into, so currency conversion was a natural pick. It also composes with the calculator: "Convert 1000 USD to BRL and add a 5% fee" exercises both tools in one query. Weather or search would have been two unrelated tools side by side. [Frankfurter](https://frankfurter.dev/) uses ECB rates and needs no API key.
 
 ### Tools return strings, even for errors
 
