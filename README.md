@@ -50,7 +50,13 @@ uv run artefact-ai-assistant "What is 128 times 46?" --verbose
 
 The agent follows the [ReAct pattern](https://arxiv.org/abs/2210.03629): at each step the LLM either calls a tool or returns the final answer. It's built with `langchain.agents.create_agent`, which compiles a state graph that loops model → tool → model until done.
 
-Routing is delegated to the LLM, not hardcoded into a router. The system prompt describes when each tool is useful, and the model decides at inference time. Adding a new tool is one line (append to the `tools=[...]` list). The agent can also chain tools in a single turn: ask "convert 1000 USD to BRL and add a 5% fee" and watch it call `currency_converter` then `calculator`.
+Routing is delegated to the LLM via the tool descriptions, not hardcoded into a router. Three paths per query:
+
+- **Direct answer** when the question is general knowledge. No tool call. Example: "Who was Marie Curie?"
+- **Single tool** when one tool gives an answer the model can't produce reliably. Example: "What is 128 times 46?" calls `calculator`.
+- **Chained tools** when an answer needs sequential steps. Example: "Convert 1000 USD to BRL and add a 5% fee" calls `currency_converter` then `calculator`.
+
+No tool runs unless the question needs it. Tool calls cost latency and API tokens, so the LLM is instructed to skip them when its own knowledge is enough. Adding a new tool is one line in the `tools=[...]` list, no router refactor.
 
 ## Decisions and trade-offs
 
@@ -84,9 +90,9 @@ I default to mypy `--strict` and structlog in production. For a 36-hour take-hom
 
 ## Demo
 
-Single tool call:
+A direct answer when no tool is needed. The agent reasons internally but skips both tools:
 
-![Single tool](docs/screenshots/chainlit-single-tool.png)
+![Single tool](docs/screenshots/chainlit-direct-answer.png)
 
 Composed query (`currency_converter` then `calculator`), five inner steps in one answer:
 
