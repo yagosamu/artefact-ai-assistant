@@ -84,10 +84,6 @@ I default to mypy `--strict` and structlog in production. For a 36-hour take-hom
 
 ## Demo
 
-A clean conversational view. Steps surface only when expanded.
-
-![Default view](docs/screenshots/chainlit-overview.png)
-
 Single tool call:
 
 ![Single tool](docs/screenshots/chainlit-single-tool.png)
